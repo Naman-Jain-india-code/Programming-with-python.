@@ -1,0 +1,35 @@
+from vpython import*
+q=2
+m=5
+#B-field
+arrow(pos=vec(0,-10,0),axis=vec(0,1,0),length=20,color=color.orange,round=True)
+arrow(pos=vec(-4,-10,0),axis=vec(0,1,0),length=20,color=color.orange,round=True)
+arrow(pos=vec(-8,-10,0),axis=vec(0,1,0),length=20,color=color.orange,round=True)
+arrow(pos=vec(4,-10,0),axis=vec(0,1,0),length=20,color=color.orange,round=True)
+arrow(pos=vec(8,-10,0),axis=vec(0,1,0),length=20,color=color.orange,round=True)
+#charge and velocity vector
+charge=sphere(pos=vec(-10,0,5),radius=3,color=color.red)
+velocity=arrow(pos=vec(charge.pos.x+3,0,5),length=5,axis=vec(1,0,0),color=color.green,round=True)
+T=text(pos=vec(-4,0.5,5),text='Velocity',align='center',color=color.green)
+#values
+v=vec(10,0,0)
+b=vec(0,5,0)
+t=0
+dt=0.001
+qv=q*v
+#Computations and movement
+while t<=4.5:
+    rate(50)
+    charge.pos=charge.pos+v*dt
+    velocity.pos=velocity.pos+v*dt
+    velocity.axis=norm(v)
+    velocity.length=5
+    f=cross(qv,b)
+    a=f/m
+    v=v+a*dt
+    T.pos=T.pos+v*dt
+    T.axis=velocity.axis
+    if charge.pos.x==13:
+        f=0
+    t=t+dt
+    
