@@ -1,0 +1,34 @@
+from Vpython import*
+#Some data 
+er=63710
+mr=17370
+r=388400
+me=5.97e24
+mm=7.35e22
+G=6.67e-11
+#earth and moon
+earth=sphere(radius=er,color=color.blue)
+moon=sphere(pos=vec(0,r,0),radius=mr,color=color.white,make_trail=True,interval=30,retain=90,trail_color=color.red)
+tau=2*3.1415
+#Some computations 
+c=tau*r
+fmag=-G*(me*mm/r**2)
+vm=32049.65
+v=vec(-vm,0,0)
+velocity=arrow(axis=norm(v),length=5*mag(v),color=color.green,round=True)
+velocity.pos=moon.pos
+t=0
+dt=0.01
+#Motion of the moon
+while t<500:
+    rate(100)
+    R=moon.pos-earth.pos
+    f=fmag*norm(R)
+    a=f/mm
+    v=v+a*dt
+    velocity.pos=velocity.pos+v*dt
+    velocity.axis=norm(v)
+    velocity.length=5*mag(v)
+    moon.pos=moon.pos+v*dt
+    t=t+dt
+    
