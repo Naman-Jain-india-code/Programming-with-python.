@@ -1,0 +1,27 @@
+from Vpython import*
+#display
+Loop=ring(axis=vec(0,0,1),radius=5,thickness=0.1,shininess=0.4)
+Bfield=arrow(axis=vec(0,0,1),length=2,color=color.orange,round=True)
+e1=arrow(color=color.cyan,pos=vec(-5,0,0),axis=vec(0,1,0),length=3,round=True)
+e2=arrow(color=color.cyan,pos=vec(5,0,0),axis=vec(0,-1,0),length=3,round=True)
+e3=arrow(color=color.cyan,pos=vec(0,5,0),axis=vec(1,0,0),length=3,round=True)
+e4=arrow(color=color.cyan,pos=vec(0,-5,0),axis=vec(-1,0,0),length=3,round=True)
+t=0
+dt=0.1
+dx=0.1
+
+
+#induction
+while t<50:
+    rate(30)
+    bb=Bfield.length
+    Bfield.length=Bfield.length+dx
+    ba=Bfield.length
+    e1.length=e1.length+dx
+    e2.length=e2.length+dx
+    e3.length=e3.length+dx
+    e4.length=e4.length+dx
+    if Bfield.length>5:
+        dx=-1*dx
+    if Bfield.length<1:
+        dx=-1*dx
